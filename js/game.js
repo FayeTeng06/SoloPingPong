@@ -37,6 +37,7 @@ var mouseObj = {};
 gameCanvas.width = W;
 gameCanvas.height = H;
 
+// Step 02 .. faye .. Clear page canvas by covering it in black
 function paintCanvas() {
 	ctx.fillStyle = "#000000";
 	ctx.fillRect(0, 0, W, H);
@@ -52,12 +53,60 @@ function trackPosition(evt) {
 
 gameCanvas.addEventListener("mousemove", trackPosition, true);
 
+//Step 03 .. faye .. Place a ball on the canvas
+var ball = {}; // Ball Object
+ball = {
+	x: 50,
+	y: 50,
+	r: 5,
+	c: "#ffffff",
+	vx: 4,
+	vy: 8,
+	
+	draw: function() {
+		ctx.beginPath();
+		ctx.fillStyle = this.c; //this refers to this ball object
+		ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
+		ctx.fill();
+	}
+}
 
+ball.draw();
 
+//Step 04 .. faye .. Place a start button on canvas
+var startBtn = {}; //start button object
+startBtn = {
+	w: 100,
+	h: 50,
+	x: W / 2 - 50,
+	y: H / 2 - 25,
+	
+	draw: function() {
+		ctx.strokeStyle = "#ffffff";
+		ctx.lineWidth = "2";
+		ctx.strokeRect(this.x, this.y, this.w, this.h);
+		
+		ctx.font = "18px Arial, sans-serif";
+		ctx.textAlign = "center";
+		ctx.textBaseline = "middle";
+		ctx.fillStyle = '#ffffff';
+		ctx.fillText("Start", W/2, H/2);
+	}
+}
 
+startBtn.draw();
 
+// Step 05 .. faye .. Place score and points on canvas
+var points = 0; // game points
+function paintScore() {
+	ctx.fillStyle = "#ffffff";
+	ctx.font = "18px Arial, sans-serif";
+	ctx.textAlign = "left";
+	ctx.textBaseline = "top";
+	ctx.fillText("Score: " + points, 20, 20);
+}
 
-
+paintScore();
 
 
 
